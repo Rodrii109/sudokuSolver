@@ -22,15 +22,12 @@ void scanGame(int grid[][GAME_SIZE]){
 bool solveGame(int grid[][GAME_SIZE]){
     int row, col;
 
-    printGame(grid);
     if(!findBlankSpace(grid,&row,&col))
         return true;
     else{
-        printf("Testando na posicao: (%d,%d)\n",row,col);
         for(int num = 1; num <= 9; ++num){
             if(!usedInBox(grid,row,col,num) && !usedInCol(grid,col,num) && !usedInRow(grid,row,num)){
                 grid[row][col] = num;
-                printf("o num %d funciona\n",num);
                 if(solveGame(grid))
                     return true;
             }
@@ -53,7 +50,6 @@ bool findBlankSpace(int grid[][GAME_SIZE], int* row, int* col){
 bool usedInRow(int grid[][GAME_SIZE], int row, int num){
     for(int col = 0; col < GAME_SIZE; ++col)
         if(grid[row][col] == num){
-            printf("achou %d na fileira (%d,%d)\n",num,row,col);
             return true;
         }
     return false;
@@ -62,7 +58,6 @@ bool usedInRow(int grid[][GAME_SIZE], int row, int num){
 bool usedInCol(int grid[][GAME_SIZE], int col, int num){
     for(int row = 0; row < GAME_SIZE; ++row)
         if(grid[row][col] == num){
-            printf("achou %d na coluna\n",num);
             return true;
         }
     return false;
@@ -75,7 +70,6 @@ bool usedInBox(int grid[][GAME_SIZE], int row, int col, int num){
     for(int i = 0; i < 3; ++i){
         for(int j = 0; j < 3; ++j){
             if(grid[boxStartRow+i][boxStartCol+j] == num){
-                printf("achou %d na caixa\n",num);
                 return true;
             }
         }
